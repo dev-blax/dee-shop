@@ -1,23 +1,28 @@
+import 'package:dee_store/features/authentication/controllers/onboarding_controller.dart';
+import 'package:dee_store/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
+import 'package:dee_store/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
 import 'package:dee_store/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:dee_store/features/authentication/screens/onboarding/widgets/onboarding_skip.dart';
-import 'package:dee_store/utils/constants/colors.dart';
 import 'package:dee_store/utils/constants/image_strings.dart';
-import 'package:dee_store/utils/constants/sizes.dart';
 import 'package:dee_store/utils/constants/text_strings.dart';
-import 'package:dee_store/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnBoardingController());
+
+
     return Scaffold(
       body: Stack(
         children: [
           // Horizontal scrollable Pages
           PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
             children: const [
               OnBoardingPage(
                 image: TImages.onBoardingImage1,
@@ -44,20 +49,18 @@ class OnBoardingScreen extends StatelessWidget {
           const OnBoardingSkip(),
 
           // dot navigation smooth page indicator
-          Positioned(
-            bottom: TDeviceUtils.getBottomNavigationBarHeight()+25,
-            left: TSizes.defaultSpace,
+          const OnBoardingDotNavigation(),
 
-            child: SmoothPageIndicator(
-              controller: PageController(), 
-              count: 3,
-              effect: const ExpandingDotsEffect(activeDotColor: TColors.dark, dotHeight: 6),
-              )
-)
+          // circular button
+          const OnBoardingNextButton(),
         ],
       ),
     );
   }
 }
+
+
+
+
 
 
