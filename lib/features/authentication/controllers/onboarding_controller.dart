@@ -1,3 +1,4 @@
+import 'package:dee_store/features/authentication/screens/login/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,7 @@ class OnBoardingController extends GetxController {
 
   // variables
   final pageController = PageController();
-  Rx<int> currentPageIndex = 0.obs;
+  int currentPageIndex = 0;
 
 
   // update current index when page scroll
@@ -17,17 +18,18 @@ class OnBoardingController extends GetxController {
 
   // jump to specific dot selected page
   void dotNavigationClick(index){
-    currentPageIndex.value = index;
+    currentPageIndex = index;
     pageController.jumpTo(index);
   }
 
   // jump to next page
   void nextPage(){
 
-    if(currentPageIndex.value == 2){
+    if(currentPageIndex == 2){
       // go to login
+      Get.offAll(const LoginScreen());
     } else {
-      int page = currentPageIndex.value + 1;
+      int page = currentPageIndex + 1;
       pageController.jumpToPage(page);
     }
 
@@ -35,7 +37,7 @@ class OnBoardingController extends GetxController {
 
   // jump to latest page
   void skipPage(){
-    currentPageIndex.value = 2;
+    currentPageIndex = 2;
     pageController.jumpToPage(2);
   }
 

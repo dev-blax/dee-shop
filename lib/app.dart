@@ -1,3 +1,4 @@
+import 'package:dee_store/features/authentication/screens/login/login.dart';
 import 'package:dee_store/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:dee_store/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
-      home: const OnBoardingScreen(),
+      home: const LoginScreen(),
     );
   }
 }
